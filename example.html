@@ -59,7 +59,7 @@
     <td>3</td>
     <td class="server_response">
     <br />
-    <span class="json">{ "glos:  sary": { "title": "example:  glossary1", "Gloss{Div": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
+    <span class="json">{ "glos:  sary": { "title": "example:  glossary1", "Gloss{Div": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML", 1, {"a":"a", "b":"b", "c":"c"}] }, "GlossSee": "markup" } } } } }</span>
     <div id='Canvas' class="Canvas">
     </div>
     </td>
@@ -198,28 +198,32 @@
     html += '</div> ]';    
   }
   
-  html = "";
+  function process_literal_node(node){
+    html += "{" + build_collapsed() + '<div>';
+    var node_length = 0;
+    for(attribute in node){
+      node_length += 1;
+    }
+  
+    var iteration = 0;
+    for(attribute in node){
+      iteration += 1;
+      eval('process_' + typeof(node[attribute]) + '_node').call(this, node, attribute, true);
+      if(iteration != node_length){
+        add_line_break();
+      }
+    }
+    html += '</div> }';    
+  }
+  
+  var html = "";
   function process_node(node){
     if(node instanceof Array){
       process_array_node(node);
     } else if(node === null){
       process_null_node(node);
     } else {
-      html += "{" + build_collapsed() + '<div>';
-      var node_length = 0;
-      for(attribute in node){
-        node_length += 1;
-      }
-    
-      var iteration = 0;
-      for(attribute in node){
-        iteration += 1;
-        eval('process_' + typeof(node[attribute]) + '_node').call(this, node, attribute, true);
-        if(iteration != node_length){
-          add_line_break();
-        }
-      }
-      html += '</div> }';
+      process_literal_node(node)
     }
   }
   
