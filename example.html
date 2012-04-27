@@ -1,0 +1,159 @@
+<html>
+<head>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+  <style>    
+    span.json {
+
+  font-family: monospace;
+    }
+    
+    span.json div {
+      margin-left: 18px;
+      display:none;
+    }
+    
+    td.server_response{
+      padding:6px; background-color: #ECECEC; color: #007777;
+    }
+    
+    span.json span.key {
+      color: #CC0000;
+      font-weight: bold;
+    }
+
+    span.expand_or_collapse:hover {
+      cursor: pointer;
+    }
+    
+    span.expand_or_collapse {
+      font-weight: bold;
+      color: black;
+    }
+    
+    span.expand_or_collapse img {
+      position: relative;
+      top: 2px;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <colgroup>
+    <col />
+    <col />
+    <col />
+    <col style="width: 1000px;"/>
+    </colgroup>
+    <tr>
+    <th>one</th>
+    <th>two</th>
+    <th>three</th>
+    <th>json</th>
+    </tr>
+    <tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td class="server_response">
+    <br />
+    <span class="json">{ "glossary": { "title": "example glossary1", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
+    <div id='Canvas' class="Canvas">
+    </div>
+    </td>
+    </tr><tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td class="server_response">
+    <br />
+    <span class="json">{ "glossary": { "title": "example glossary2", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
+    <div id='Canvas' class="Canvas">
+    </div>
+    </td>
+    </tr><tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td class="server_response">
+    <br />
+    <span class="json">{ "glossary": { "title": "example glossary3", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
+    <div id='Canvas' class="Canvas">
+    </div>
+    </td>
+    </tr><tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td class="server_response">
+    <br />
+    <span class="json">{ "glossary": { "title": "example glossary4", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
+    <div id='Canvas' class="Canvas">
+    </div>
+    </td>
+    </tr><tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td class="server_response">
+    <br />
+    <span class="json">{ "glossary": { "title": "example glossary5", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
+    <div id='Canvas' class="Canvas">
+    </div>
+    </td>
+    </tr>
+  </table>
+</body>
+<foot>
+  <script>
+  $(function() {
+    $('.expand_or_collapse img').live('click', function(){
+      var self = $(this).parents('.expand_or_collapse')
+      console.log(self.next('div'))
+      self.next('div').toggle();
+      if(self.hasClass('collapsed')){
+        self.html(image_expanded());
+        self.removeClass('collapsed')
+      } else {
+        self.addClass('collapsed')
+        self.html(image_collapsed());
+      }
+    })
+
+  
+  function image_collapsed(){
+    return '<img src="images/collapsed.gif" />';
+  }
+  
+  function image_expanded(){
+    return '<img src="images/expanded.gif" />';    
+  }
+
+   function build_collapsed(){
+     return '<span class="expand_or_collapse collapsed">' + image_collapsed() + '</span>';
+   }
+  
+  
+    function separate_json(element){
+      var self = $(element)
+      html = self.html()
+      evaled = jQuery.parseJSON(html)
+      html = html.replace(/("[\w\"]+):/g, "<span class='key'>$1</span>:")      
+      html = html.replace(/\{/g, '{ ' + build_collapsed() + '<div>')
+      html = html.replace(/\}/g, '</div>}')
+      html = html.replace(/\[/g, '[ ' + build_collapsed() + '<div>')
+      html = html.replace(/\]/g, '</div>]')
+      html = html.replace(/\:/g, '</span>:')
+      html = html.replace(/\,/g, ',<br />')
+      $(element).html(html)
+    }
+
+    $('.json').each(function(index, element){
+      separate_json(element)
+    })    
+  });
+  </script>
+</foot>
+</html>
