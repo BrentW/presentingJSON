@@ -110,14 +110,13 @@
   <script>
   $(function() {
     $('.expand_or_collapse img').live('click', function(){
-      var self = $(this).parents('.expand_or_collapse')
-      console.log(self.next('div'))
+      var self = $(this).parents('.expand_or_collapse');
       self.next('div').toggle();
       if(self.hasClass('collapsed')){
         self.html(image_expanded());
-        self.removeClass('collapsed')
+        self.removeClass('collapsed');
       } else {
-        self.addClass('collapsed')
+        self.addClass('collapsed');
         self.html(image_collapsed());
       }
     })
@@ -160,7 +159,7 @@
       add_wrapped_key(attribute);
     }
     
-    html += node[attribute]    
+    html += node[attribute]; 
   }
   
   function process_number_node(node, attribute, keyed){
@@ -184,11 +183,11 @@
       add_wrapped_key(attribute);
     }
     
-    process_node(node[attribute])
+    process_node(node[attribute]);
   }
   
   function process_array_node(node){
-    html += "[" + build_collapsed() + '<div>'
+    html += "[" + build_collapsed() + '<div>';
   
     for(attribute in node){
       eval('process_' + typeof(node[attribute]) + '_node').call(this, node, attribute, false);
@@ -196,7 +195,7 @@
         add_line_break();
       }
     }
-    html += '</div> ]'    
+    html += '</div> ]';    
   }
   
   html = "";
@@ -206,36 +205,34 @@
     } else if(node === null){
       process_null_node(node);
     } else {
-      html += "{" + build_collapsed() + '<div>'
+      html += "{" + build_collapsed() + '<div>';
       var node_length = 0;
       for(attribute in node){
         node_length += 1;
       }
     
-      var iteration = 0
+      var iteration = 0;
       for(attribute in node){
-        iteration += 1
+        iteration += 1;
         eval('process_' + typeof(node[attribute]) + '_node').call(this, node, attribute, true);
         if(iteration != node_length){
           add_line_break();
         }
       }
-      html += '</div> }'
+      html += '</div> }';
     }
   }
   
    function present_json(element){
-     var self = $(element)
-     console.log(self)
-     console.log(self.html())
+     var self = $(element);
      parsed_json = $.parseJSON(self.html());     
      
      process_node(parsed_json);
-     self.html(html)
+     self.html(html);
    }
 
    $('.json').each(function(index, element){
-     present_json(element)
+     present_json(element);
    })   
   });
   </script>
