@@ -108,8 +108,9 @@
 </body>
 <foot>
   <script>
-  $(function() {    
-  function PresentingJson(element){
+  $(function() {  
+    (function($){  
+  function PresentingJson(element, options){
     var self = $(element);
     
     function image_collapsed(){
@@ -241,12 +242,17 @@
      
     initialize();   
    }
-   // $('.json').each(function(index, element){
-   //   present_json(element);
-   // })  
+
    
-   var presenter = PresentingJson($(".json")[0]);
-    
+     $.fn.presentJson = function(options) {
+       var options = options || {};
+
+       $(this).each(function(index, selectTag){
+         PresentingJson($(selectTag), options);
+       });
+     };
+   })( jQuery );    
+   $(".json").presentJson();
   });
   </script>
 </foot>
