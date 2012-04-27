@@ -1,0 +1,60 @@
+span.presenting_json_wrap {
+  font-family: monospace;
+  line-height: 1.4em;
+}
+
+span.presenting_json_wrap div {
+  margin-left: 18px;
+  display:none;
+}
+
+span.presenting_json_wrap span.key {
+  color: #CC0000;
+  font-weight: bold;
+}
+
+span.expand_or_collapse:hover {
+  cursor: pointer;
+}
+
+span.expand_or_collapse {
+  font-weight: bold;
+  color: black;
+  margin-left: 6px;
+}
+
+span.expand_or_collapse img {
+  position: relative;
+  top: 2px;
+  margin-right: 6px;
+}
+
+span.presenting_json_wrap span.json_number {
+  color: blue;
+  font-weight: bold;
+}
+
+span.presenting_json_wrap {
+  color: #007777;  
+}
+
+span.presenting_json_wrap span.json_string {
+ color: #007777;
+}
+
+span.presenting_json_wrap span.json_colon {
+ color: black;
+}
+
+span.presenting_json_wrap span.json_comma {
+ color: black;
+}
+
+span.presenting_json_wrap span.json_boolean {
+ color: orange;
+}
+
+span.presenting_json_wrap span.json_null {
+ color: brown;
+ font-weight: bold;
+}

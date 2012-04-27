@@ -1,43 +1,15 @@
 <html>
 <head>
-
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script type="text/javascript" src="javascripts/presenting_json.js"></script>
 
-  <style>    
-    span.json {
-      font-family: monospace;
-    }
-    
-    span.json div {
-      margin-left: 18px;
-      display:none;
-    }
-    
-    td.server_response{
-      padding:6px; background-color: #ECECEC; color: #007777;
-    }
-    
-    span.json span.key {
-      color: #CC0000;
-      font-weight: bold;
-    }
-
-    span.expand_or_collapse:hover {
-      cursor: pointer;
-    }
-    
-    span.expand_or_collapse {
-      font-weight: bold;
-      color: black;
-    }
-    
-    span.expand_or_collapse img {
-      position: relative;
-      top: 2px;
-      margin-right: 6px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="stylesheets/presenting_json.css" />
+  
+  <script>
+    $(function() {  
+      $(".json").presentJson();
+    });
+  </script>
 </head>
 <body>
   <table>
@@ -59,7 +31,7 @@
     <td>3</td>
     <td class="server_response">
     <br />
-    <span class="json">{ "glos:  sary": { "title": "example:  glossary1", "Gloss{Div": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML", 1, {"a":"a", "b":"b", "c":"c"}] }, "GlossSee": "markup" } } } } }</span>
+    <span class="json">{ "glos:  sary": { "title": "example:  glossary1", "Gloss{Div": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML", true, false, null, 1, {"a":"a", "b":"b", "c":"c"}] }, "GlossSee": "markup" } } } } }</span>
     <div id='Canvas' class="Canvas">
     </div>
     </td>
@@ -106,12 +78,4 @@
         </tr> -->
   </table>
 </body>
-<foot>
-  <script>
-  $(function() {  
-
-   $(".json").presentJson();
-  });
-  </script>
-</foot>
 </html>
