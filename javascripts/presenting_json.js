@@ -2,7 +2,14 @@ $(function() {
   (function($){  
 function PresentingJson(element, options){
   var self = $(element);
-    var html = "";
+  var html = "";
+  var easing = options.easing || 'linear'
+  var toggleSpeed = options.toggleSpeed || 200;
+  var colors = options.colors || {};
+
+  if(options.toggleSpeed === 0){
+    toggleSpeed = 0;
+  }
   
   function image_collapsed(){
     return '<img src="images/collapsed.gif" />';
@@ -111,7 +118,7 @@ function PresentingJson(element, options){
   function bind_events(){
     self.find('.expand_or_collapse img').live('click', function(){
       var span = $(this).parents('.expand_or_collapse');
-      span.next('div').toggle();
+      span.next('div').toggle(toggleSpeed, easing);
       if(span.hasClass('collapsed')){
         span.html(image_expanded());
         span.removeClass('collapsed');
@@ -121,12 +128,29 @@ function PresentingJson(element, options){
       }
     })
   }
+  
+  function set_colors(){
+    for(element in colors) {
+      var color = colors[element];
+      
+      if(element === 'wrapper') {
+        self.find('span.presenting_json_wrap').css('color', color);
+      } else if (element == 'key') {
+        self.find('span.presenting_json_wrap span.key').css('color', color);
+      } else if (element === 'all'){
+        self.find('span.presenting_json_wrap, span.presenting_json_wrap *').css('color', color);
+      } else {
+        self.find('span.presenting_json_wrap span.json_' + element).css('color', color);
+      }
+    }
+  }
 
    function initialize(element){   
      html += '<span class="presenting_json_wrap">';
      process_node($.parseJSON(self.html()));
      html += '</span>'
      self.html(html);
+     set_colors();
      bind_events();
    }
    

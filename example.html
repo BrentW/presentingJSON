@@ -8,74 +8,24 @@
   <script>
     $(function() {  
       $(".json").presentJson();
+      $(".json2").presentJson({toggleSpeed: 0, colors: { colon: "pink", comma: "purple", string: "green", key: 'orange' }});      
+      $(".json3").presentJson({toggleSpeed: 0, colors: { all: 'red' }});
     });
   </script>
 </head>
 <body>
-  <table>
-    <colgroup>
-    <col />
-    <col />
-    <col />
-    <col style="width: 1000px;"/>
-    </colgroup>
-    <tr>
-    <th>one</th>
-    <th>two</th>
-    <th>three</th>
-    <th>json</th>
-    </tr>
-    <tr>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td class="server_response">
-    <br />
-    <span class="json">{ "glos:  sary": { "title": "example:  glossary1", "Gloss{Div": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML", true, false, null, 1, {"a":"a", "b":"b", "c":"c"}] }, "GlossSee": "markup" } } } } }</span>
-    <div id='Canvas' class="Canvas">
-    </div>
-    </td>
-    </tr><!-- <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td class="server_response">
-        <br />
-        <span class="json">{ "glossary": { "title": "example glossary2", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
-        <div id='Canvas' class="Canvas">
+
+    <div class="json">{ "glos:  sary": { "title": "example:  glossary1", "Gloss{Div": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML", true, false, null, 1, {"a":"a", "b":"b", "c":"c"}] }, "GlossSee": "markup" } } } } }</div>
+
+
+    <div class="json2">
+      { "glossary": { "title": "example glossary2", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }
+      </div>
+
+
+      <div class="json3">
+        { "glossary": { "title": "example glossary2", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }
         </div>
-        </td>
-        </tr><tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td class="server_response">
-        <br />
-        <span class="json">{ "glossary": { "title": "example glossary3", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
-        <div id='Canvas' class="Canvas">
-        </div>
-        </td>
-        </tr><tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td class="server_response">
-        <br />
-        <span class="json">{ "glossary": { "title": "example glossary4", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
-        <div id='Canvas' class="Canvas">
-        </div>
-        </td>
-        </tr><tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td class="server_response">
-        <br />
-        <span class="json">{ "glossary": { "title": "example glossary5", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", "SortAs": "SGML", "GlossTerm": "Standard Generalized Markup Language", "Acronym": "SGML", "Abbrev": "ISO 8879:1986", "GlossDef": { "para": "A meta-markup language, used to create markup languages such as DocBook.", "GlossSeeAlso": ["GML", "XML"] }, "GlossSee": "markup" } } } } }</span>
-        <div id='Canvas' class="Canvas">
-        </div>
-        </td>
-        </tr> -->
-  </table>
+
 </body>
 </html>
