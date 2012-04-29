@@ -6,6 +6,7 @@ $(function() {
       var easing = options.easing || 'linear'
       var toggleSpeed = options.toggleSpeed || 200;
       var colors = options.colors || {};
+      var transform_strings = options.before_render_string || function(key, string){ return 'string' };
 
       if(options.toggleSpeed === 0){
         toggleSpeed = 0;
@@ -36,11 +37,14 @@ $(function() {
       }
 
       function process_string_node(node, attribute, keyed){
+        var value = node[attribute];
+        
+        value = transform_strings(attribute, value);
         if(keyed){
           add_wrapped_key(attribute);
         }
-  
-        html += '<span class="json_string">"' + node[attribute] + '"</span>';    
+        
+        html += '<span class="json_string">"' + value + '"</span>';    
       }
 
       function process_number_node(node, attribute, keyed){
@@ -59,7 +63,7 @@ $(function() {
         html += '<span class="json_boolean">' + node[attribute] + '</span>';    
       }
 
-      function process_null_node(node, attribute, keyed){
+      function process_null(node, attribute, keyed){
         if(keyed){
           add_wrapped_key(attribute);      
         }
@@ -71,11 +75,11 @@ $(function() {
         if(keyed){
           add_wrapped_key(attribute);
         }
-  
-        process_node(node[attribute]);
+    
+        process_json(node[attribute]);
       }
 
-      function process_array_node(node){
+      function process_array(node){
         html += "[" + build_collapsed() + '<div>';
 
         for(attribute in node){
@@ -87,7 +91,7 @@ $(function() {
         html += '</div> ]';    
       }
 
-      function process_literal_node(node){
+      function process_object(node){
         html += "{" + build_collapsed() + '<div>';
         var node_length = 0;
         for(attribute in node){
@@ -105,13 +109,13 @@ $(function() {
         html += '</div> }';    
       }
 
-      function process_node(node){
+      function process_json(node){
         if(node instanceof Array){
-          process_array_node(node);
+          process_array(node);
         } else if(node === null){
-          process_null_node(node);
+          process_null(node);
         } else {
-          process_literal_node(node)
+          process_object(node)
         }
       }
 
@@ -147,7 +151,7 @@ $(function() {
 
       function initialize(element){   
         html += '<span class="presenting_json_wrap">';
-        process_node($.parseJSON(self.html()));
+        process_json($.parseJSON(self.html()));
         html += '</span>'
         self.html(html);
         set_colors();
