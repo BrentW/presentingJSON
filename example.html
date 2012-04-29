@@ -7,7 +7,7 @@
   
   <script>
     $(function() {  
-      $(".strip_strings").presentJson({transform_strings: function(key, string){ return string; }});
+      $(".strip_strings").presentJson({transform_strings: function(key, string){ return "String Override"; }});
       
       $(".json").presentJson();
       $(".json2").presentJson({toggleSpeed: 0, colors: { colon: "pink", comma: "purple", string: "green", key: 'orange' }});      
