@@ -6,7 +6,7 @@ $(function() {
       var easing = options.easing || 'linear'
       var toggleSpeed = options.toggleSpeed || 200;
       var colors = options.colors || {};
-      var transform_strings = options.transform_strings || function(key, string){ return 'string' };
+      var transform_strings = options.transform_strings || function(key, string){ return string };
 
       if(options.toggleSpeed === 0){
         toggleSpeed = 0;
